@@ -1,0 +1,52 @@
+######### Deployment ########
+deployment:
+  create: true
+
+appName: petclinic-discovery-server
+namespace: petclinic-dev
+
+#spec
+replicaCount: 1
+revisionHistoryLimit: 11
+
+rollingUpdate:
+  maxSurge: "25%"
+  maxUnavailable: "25%"
+
+pullFromPrivateRegistry:
+  enabled: true
+  secretName: "dockerhub"
+
+initContainers:
+  - name: wait-for-config-server
+    image: darthcabs/tiny-tools:1
+    command:
+      ["sh", "-c", "until curl -s http://petclinic-config-server-service:8888/; do echo waiting for config server; sleep 5; done"]
+
+appImage: "thuanlp/spring-petclinic-discovery-server"
+appVersion: "latest"
+containerPort: 8761
+
+volumes:
+  - configMap:
+      defaultMode: 420
+      name: "petclinic-discovery-server-application-properties-configmap"
+    name: "petclinic-discovery-server-application-properties-config-volume"
+
+volumeMounts:
+  - name: "petclinic-discovery-server-application-properties-config-volume"
+    mountPath: /app/config/application.properties
+    subPath: application.properties
+
+######### Service ########
+service:
+  create: true
+  type: NodePort
+  port: 8761
+  targetPort: 8761
+  nodePort: 30061
+
+######### ConfigMap ########
+configmap:
+  discovery-server:
+    create: true

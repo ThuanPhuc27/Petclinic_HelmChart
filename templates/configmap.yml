@@ -1,0 +1,154 @@
+{{- if .Values.configmap.admin-server.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-admin-server-application-properties-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  application.properties: |
+    spring.application.name=admin-server
+    spring.config.import=optional:configserver:${CONFIG_SERVER_URL:http://petclinic-config-server-service:8888/}
+{{- end }}
+
+---
+
+{{- if .Values.configmap.api-gateway.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-api-gateway-application-properties-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  application.properties: |
+    spring.application.name=api-gateway
+    spring.config.import=optional:configserver:${CONFIG_SERVER_URL:http://petclinic-config-server-service:8888/}
+    
+    spring.cloud.gateway.default-filters[0].name=CircuitBreaker
+    spring.cloud.gateway.default-filters[0].args.name=defaultCircuitBreaker
+    spring.cloud.gateway.default-filters[0].args.fallbackUri=forward:/fallback
+    
+    spring.cloud.gateway.default-filters[1].name=Retry
+    spring.cloud.gateway.default-filters[1].args.retries=1
+    spring.cloud.gateway.default-filters[1].args.statuses=SERVICE_UNAVAILABLE
+    spring.cloud.gateway.default-filters[1].args.methods=POST
+    
+    spring.cloud.gateway.routes[0].id=vets-service
+    spring.cloud.gateway.routes[0].uri=http://petclinic-vets-service-service:8083
+    spring.cloud.gateway.routes[0].predicates[0]=Path=/api/vet/**
+    spring.cloud.gateway.routes[0].filters[0]=StripPrefix=2
+    
+    spring.cloud.gateway.routes[1].id=visits-service
+    spring.cloud.gateway.routes[1].uri=http://petclinic-visits-service-service:8082
+    spring.cloud.gateway.routes[1].predicates[0]=Path=/api/visit/**
+    spring.cloud.gateway.routes[1].filters[0]=StripPrefix=2
+    
+    spring.cloud.gateway.routes[2].id=customers-service
+    spring.cloud.gateway.routes[2].uri=http://petclinic-customers-service-service:8081
+    spring.cloud.gateway.routes[2].predicates[0]=Path=/api/customer/**
+    spring.cloud.gateway.routes[2].filters[0]=StripPrefix=2
+    
+    spring.cloud.gateway.routes[3].id=genai-service
+    spring.cloud.gateway.routes[3].uri=http://petclinic-genai-service-service:8084
+    spring.cloud.gateway.routes[3].predicates[0]=Path=/api/genai/**
+    spring.cloud.gateway.routes[3].filters[0]=StripPrefix=2
+    spring.cloud.gateway.routes[3].filters[1]=CircuitBreaker=name=genaiCircuitBreaker,fallbackUri=/fallback
+{{- end }}
+
+--- 
+
+{{- if .Values.configmap.config-server.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-config-server-application-properties-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  application.properties: |
+    server.port=8888
+    spring.cloud.config.server.git.uri=https://github.com/ThuanPhuc27/spring-petclinic-microservices-config
+    spring.cloud.config.server.git.default-label=main
+{{- end }}
+
+---
+
+{{- if .Values.configmap.customers-service.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-customers-service-application-properties-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  application.properties: |
+    spring.application.name=customers-service
+    spring.config.import=optional:configserver:${CONFIG_SERVER_URL:http://petclinic-config-server-service:8888/}
+{{- end }}
+
+---
+
+{{- if .Values.configmap.discovery-server.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-discovery-server-application-properties-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  application.properties: |
+    spring.application.name=discovery-server
+    spring.config.import=optional:configserver:${CONFIG_SERVER_URL:http://petclinic-config-server-service:8888/}
+    logging.level.org.springframework.boot=INFO
+    logging.level.org.springframework.web=INFO
+{{- end }}
+
+---
+
+{{- if .Values.configmap.genai-service.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-genai-service-application-properties-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  application.properties: |
+    spring.main.web-application-type=reactive
+    spring.application.name=genai-service
+    spring.config.import=optional:configserver:${CONFIG_SERVER_URL:http://petclinic-config-server-service:8888/},optional:classpath:/creds.yaml
+    spring.ai.chat.client.enabled=true
+    spring.ai.azure.openai.api-key=${AZURE_OPENAI_KEY}
+    spring.ai.azure.openai.endpoint=${AZURE_OPENAI_ENDPOINT}
+    spring.ai.azure.openai.chat.options.temperature=0.7
+    spring.ai.azure.openai.chat.deployment-name=gpt-4o
+    spring.ai.openai.api-key=${OPENAI_API_KEY:demo}
+    spring.ai.openai.chat.options.temperature=0.7
+    spring.ai.openai.chat.options.model=gpt-4o-mini
+
+    logging.level.org.springframework.ai.chat.client.advisor=DEBUG
+{{- end }}
+
+---
+
+{{- if .Values.configmap.vets-service.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-vets-service-application-properties-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  application.properties: |
+    spring.application.name=vets-service
+    spring.config.import=optional:configserver:${CONFIG_SERVER_URL:http://petclinic-config-server-service:8888/}
+    spring.cache.cache-names=vets
+{{- end }}
+
+---
+
+{{- if .Values.configmap.visits-service.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-visits-service-application-properties-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  application.properties: |
+    spring.application.name=visits-service
+    spring.config.import=optional:configserver:${CONFIG_SERVER_URL:http://petclinic-config-server-service:8888/}
+{{- end }}

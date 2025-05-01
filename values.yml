@@ -1,0 +1,24 @@
+# Kind
+deployment:
+  create: false
+
+service:
+  create: false
+
+ingress:
+  create: false
+
+#Metadata
+appName: ""
+appImage: ""
+appVersion: ""
+appLabel: ""
+annotations:
+  revisionTag: ""
+
+
+replicaCount: 1
+containerPort: ""
+containerEnvVar: []
+  #- key:
+  #  value:

@@ -1,0 +1,86 @@
+{{- if .Values.deployment.create }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.appName }}-deployment"
+  labels:
+    app: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.rollingUpdate.maxUnavailable }}
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      {{- if .Values.pullFromPrivateRegistry.enabled }}
+      imagePullSecrets:
+      - name: {{ .Values.pullFromPrivateRegistry.secretName }}
+      {{- end }}
+      {{- if .Values.initContainers }}
+      {{- if gt (len .Values.initContainers) 0 }}
+      initContainers:
+      {{- range .Values.initContainers }}
+      - name: {{ .name }}
+        image: {{ .image }}
+        command: {{ toJson .command }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
+      containers:
+      - name: {{ .Values.appName }}
+        image: "{{ .Values.appImage }}:{{ .Values.appVersion }}"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+
+        {{- if .Values.containerEnvVar }}
+        env:
+        {{- range .Values.containerEnvVar }}
+        - name: {{ .key }}
+          value: {{ .value | quote }}
+        {{- end }}
+        {{- end }}
+
+        {{- if .Values.volumeMounts }}
+        volumeMounts:
+        {{- range .Values.volumeMounts }}
+        - name: {{ .name }}
+          mountPath: {{ .mountPath | quote }}
+          {{- if .subPath }}
+          subPath: {{ .subPath | quote }}
+          {{- end }}
+        {{- end }}
+        {{- end }}
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+      {{- if .Values.volumes }}
+      {{- if gt (len .Values.volumes) 0 }}
+      volumes:
+      {{- range .Values.volumes }}
+      - name: {{ .name }}
+        {{- if .emptyDir }}
+        emptyDir: {}
+        {{- else if .configMap }}
+        configMap:
+          name: {{ .configMap.name }}
+          {{- if .configMap.defaultMode }}
+          defaultMode: {{ .configMap.defaultMode }}
+          {{- end }}
+        {{- else if .secret }}
+        secret:
+          secretName: {{ .secret.name }}
+        {{- end }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
+{{- end }}
