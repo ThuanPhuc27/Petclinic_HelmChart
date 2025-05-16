@@ -1,4 +1,4 @@
-{{- if .Values.configMap.discovery-server.create }}
+{{- if .Values.configMap.discoveryServer.create }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
