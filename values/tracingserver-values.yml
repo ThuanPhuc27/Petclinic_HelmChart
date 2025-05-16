@@ -1,4 +1,0 @@
-tracing-server:
-  create: true
-
-namespace: petclinic-dev

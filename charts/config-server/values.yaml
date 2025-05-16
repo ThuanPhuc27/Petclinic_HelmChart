@@ -1,0 +1,15 @@
+appName: petclinic-config-server
+namespace: petclinic-dev
+image:
+  repository: thuanlp/spring-petclinic-config-server
+  tag: latest
+  pullSecret: dockerhub
+  pullPolicy: Always
+service:
+  port: 8888
+  type: NodePort
+  nodePort: 30088
+configMap:
+  config-server:
+    create: true
+  name: petclinic-config-server-application-properties-configmap

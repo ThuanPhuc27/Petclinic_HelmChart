@@ -1,0 +1,19 @@
+appName: petclinic-discovery-server
+namespace: petclinic-dev
+image:
+  repository: thuanlp/spring-petclinic-discovery-server
+  tag: latest
+  pullSecret: dockerhub
+  pullPolicy: Always
+service:
+  port: 8761
+  type: NodePort
+  nodePort: 30061
+initContainers:
+  - name: init-discovery-server
+    image: darthcabs/tiny-tools:1
+    command: ["sh", "-c", "until curl -s http://petclinic-config-server-service:8888/; do echo waiting for config server; sleep 5; done"]
+configMap:
+  discovery-server:
+    create: true
+  name: petclinic-discovery-server-application-properties-configmap
