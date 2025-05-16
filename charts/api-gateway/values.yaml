@@ -17,6 +17,6 @@ initContainers:
     image: darthcabs/tiny-tools:1
     command: ["sh", "-c", "until curl -s http://petclinic-discovery-server-service:8761/; do echo waiting for discovery server; sleep 5; done"]
 configMap:
-  api-gateway:
+  apiGateway:
     create: true
   name: petclinic-api-gateway-application-properties-configmap
