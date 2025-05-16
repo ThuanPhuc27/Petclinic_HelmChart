@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tracing-server
+  name: api-gateway
   namespace: argocd   # namespace ArgoCD đang chạy, thường là argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/ThuanPhuc27/Petclinic_HelmChart
-    path: charts/tracing-server
+    path: charts/api-gateway
     targetRevision: main
     helm:
       valueFiles:
         - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace:  petclinic-dev   # namespace để deploy app config-server
+    namespace:  petclinic-staging   # namespace để deploy app config-server
   syncPolicy:
     automated:
       selfHeal: true

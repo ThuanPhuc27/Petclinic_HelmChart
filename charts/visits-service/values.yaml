@@ -1,5 +1,4 @@
 appName: petclinic-visits-service
-namespace: petclinic-dev
 image:
   repository: thuanlp/spring-petclinic-visits-service
   tag: latest

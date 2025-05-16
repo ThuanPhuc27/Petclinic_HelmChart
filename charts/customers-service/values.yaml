@@ -1,5 +1,4 @@
 appName: petclinic-customers-service
-namespace: petclinic-dev
 image:
   repository: thuanlp/spring-petclinic-customers-service
   tag: latest

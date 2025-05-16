@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: {{ .Values.ingressName }}
+    name: {{ .Release.Namespace }}
     namespace: {{ .Values.namespace }}
     annotations:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
