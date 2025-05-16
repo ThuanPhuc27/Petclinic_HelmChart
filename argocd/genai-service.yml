@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: genai-service
+  namespace: argocd   # namespace ArgoCD đang chạy, thường là argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ThuanPhuc27/Petclinic_HelmChart
+    path: charts/genai-service
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace:  petclinic-dev   # namespace để deploy app config-server
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

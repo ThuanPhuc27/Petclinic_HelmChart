@@ -1,4 +1,4 @@
-{{- if .Values.configMap.customers-service.create }}
+{{- if .Values.configMap.customersService.create }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

@@ -1,4 +1,4 @@
-{{- if .Values.configMap.genai-service.create }}
+{{- if .Values.configMap.genaiService.create }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
