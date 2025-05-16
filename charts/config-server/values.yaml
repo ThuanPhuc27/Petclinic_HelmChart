@@ -10,6 +10,6 @@ service:
   type: NodePort
   nodePort: 30088
 configMap:
-  config-server:
+  configServer:
     create: true
   name: petclinic-config-server-application-properties-configmap
