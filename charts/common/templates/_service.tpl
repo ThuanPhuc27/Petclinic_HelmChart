@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "{{ .Release.Namespace }}-service"
-  namespace: {{ .Values.namespace }}
+  name: "{{ .Values.namespace }}-service"
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.appName }}
 spec:
