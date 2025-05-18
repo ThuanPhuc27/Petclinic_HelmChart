@@ -4,7 +4,7 @@ metadata:
   name: api-gateway
   namespace: argocd   # namespace ArgoCD đang chạy, thường là argocd
 spec:
-  project: default
+  project: petclinic-staging
   source:
     repoURL: https://github.com/ThuanPhuc27/Petclinic_HelmChart
     path: charts/api-gateway

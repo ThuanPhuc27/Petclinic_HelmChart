@@ -4,7 +4,7 @@ metadata:
   name: tracing-server
   namespace: argocd  
 spec:
-  project: default
+  project: petclinic-dev
   source:
     repoURL: https://github.com/ThuanPhuc27/Petclinic_HelmChart
     path: charts/tracing-server
