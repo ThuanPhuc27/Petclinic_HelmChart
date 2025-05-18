@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: admin-server
+  name: admin-server-staging
   namespace: argocd   # namespace ArgoCD đang chạy, thường là argocd
 spec:
   project: petclinic-staging

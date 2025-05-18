@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vets-service
+  name: vets-service-dev
   namespace: argocd   # namespace ArgoCD đang chạy, thường là argocd
 spec:
   project: petclinic-dev
