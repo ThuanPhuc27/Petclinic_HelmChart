@@ -1,1 +1,10 @@
 appName: tracing-server
+
+ingress:
+  tls:
+    - hosts:
+        - tracing-server-dev.lptdevops.website
+      secretName: tracing-tls
+  domainName: tracing-server-dev.lptdevops.website
+  path: /
+  pathType: Prefix

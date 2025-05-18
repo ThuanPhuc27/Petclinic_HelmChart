@@ -6,8 +6,7 @@ image:
   pullPolicy: Always
 service:
   port: 8081
-  type: NodePort
-  nodePort: 30081
+  type: ClusterIP
 initContainers:
   - name: wait-for-config-server
     image: darthcabs/tiny-tools:1
@@ -19,3 +18,12 @@ configMap:
   customersService:
     create: true
   name: petclinic-customers-service-application-properties-configmap
+
+ingress:
+  tls:
+    - hosts:
+        - customer-service-dev.lptdevops.website
+      secretName: customer-tls
+  domainName: customer-service-dev.lptdevops.website
+  path: /
+  pathType: Prefix

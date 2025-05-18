@@ -6,8 +6,7 @@ image:
   pullPolicy: Always
 service:
   port: 8083
-  type: NodePort
-  nodePort: 30083
+  type: ClusterIP
 initContainers:
   - name: wait-for-config-server
     image: darthcabs/tiny-tools:1
@@ -19,3 +18,12 @@ configMap:
   name: petclinic-vets-service-application-properties-configmap
   vetsService:
     create: true
+
+ingress:
+  tls:
+    - hosts:
+        - vets-service-dev.lptdevops.website
+      secretName: vets-tls
+  domainName: vets-service-dev.lptdevops.website
+  path: /
+  pathType: Prefix

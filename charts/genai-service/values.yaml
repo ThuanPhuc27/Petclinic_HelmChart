@@ -6,8 +6,7 @@ image:
   pullPolicy: Always
 service:
   port: 8084
-  type: NodePort
-  nodePort: 30084
+  type: ClusterIP
 initContainers:
   - name: wait-for-config-server
     image: darthcabs/tiny-tools:1
@@ -19,3 +18,12 @@ configMap:
   genaiService:
     create: true
   name: petclinic-genai-service-application-properties-configmap
+
+ingress:
+  tls:
+    - hosts:
+        - genai-service-dev.lptdevops.website
+      secretName: genai-tls
+  domainName: genai-service-dev.lptdevops.website
+  path: /
+  pathType: Prefix

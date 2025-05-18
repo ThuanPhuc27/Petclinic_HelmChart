@@ -1,17 +1,17 @@
-{{- if .Values.ingress.create }}
+{{- define "common.ingress" -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: "{{ .Release.appName }}-ingress"
-    namespace: {{ .Values.Namespace }}
+    name: "{{ .Values.appName }}-ingress"
+    namespace: {{ .Release.Namespace }}
     annotations:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  {{- if .Values.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
-    {{- range .Values.tls }}
+    {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -21,14 +21,14 @@ spec:
   {{- end }}
   ingressClassName: nginx
   rules:
-    - host: {{ .Values.domainName | quote}}
+    - host: {{ .Values.ingress.domainName | quote}}
       http:
         paths:
-        - path: {{ .Values.path }}
-          pathType: {{ .Values.pathType }}
+        - path: {{ .Values.ingress.path }}
+          pathType: {{ .Values.ingress.pathType }}
           backend:
             service:
-              name: {{ .Values.serviceName }}
+              name: "{{ .Values.appName }}-service"
               port:
-                number: {{ .Values.servicePort }}
+                number: {{ .Values.service.port }}
 {{- end }}

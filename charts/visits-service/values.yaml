@@ -6,8 +6,7 @@ image:
   pullPolicy: Always
 service:
   port: 8082
-  type: NodePort
-  nodePort: 30082
+  type: ClusterIP
 initContainers:
   - name: wait-for-config-server
     image: darthcabs/tiny-tools:1
@@ -19,3 +18,12 @@ configMap:
   name: petclinic-visits-service-application-properties-configmap
   visitsService:
     create: true
+
+ingress:
+  tls:
+    - hosts:
+        - visits-service-dev.lptdevops.website
+      secretName: visits-tls
+  domainName: visits-service-dev.lptdevops.website
+  path: /
+  pathType: Prefix

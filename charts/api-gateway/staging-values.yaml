@@ -23,8 +23,8 @@ configMap:
 ingress:
   tls:
     - hosts:
-        - api-gateway-dev.lptdevops.website
+        - api-gateway.lptdevops.website
       secretName: gateway-tls
-  domainName: api-gateway-dev.lptdevops.website
+  domainName: api-gateway.lptdevops.website
   path: /
   pathType: Prefix

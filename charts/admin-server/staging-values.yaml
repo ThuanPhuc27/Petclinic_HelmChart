@@ -1,12 +1,13 @@
-appName: petclinic-api-gateway
+appName: petclinic-admin-server
+service:
+  port: 9090
+  type: ClusterIP
+
 image:
-  repository: thuanlp/spring-petclinic-api-gateway
+  repository: thuanlp/spring-petclinic-admin-server
   tag: latest
   pullSecret: dockerhub
   pullPolicy: Always
-service:
-  port: 8080
-  type: ClusterIP
 initContainers:
   - name: wait-for-config-server
     image: darthcabs/tiny-tools:1
@@ -16,15 +17,15 @@ initContainers:
     command: ["sh", "-c", "until curl -s http://petclinic-discovery-server-service:8761/; do echo waiting for discovery server; sleep 5; done"]
 
 configMap:
-  apiGateway:
+  adminServer:
     create: true
-  name: petclinic-api-gateway-application-properties-configmap
+  name: petclinic-admin-server-application-properties-configmap
 
 ingress:
   tls:
     - hosts:
-        - api-gateway-dev.lptdevops.website
-      secretName: gateway-tls
-  domainName: api-gateway-dev.lptdevops.website
+        - admin-server.lptdevops.website
+      secretName: dashboard-tls
+  domainName: admin-server.lptdevops.website
   path: /
   pathType: Prefix

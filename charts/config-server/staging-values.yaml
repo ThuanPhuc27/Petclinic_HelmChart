@@ -16,8 +16,8 @@ configMap:
 ingress:
   tls:
     - hosts:
-        - config-server-dev.lptdevops.website
+        - config-server.lptdevops.website
       secretName: config-tls
-  domainName: config-server-dev.lptdevops.website
+  domainName: config-server.lptdevops.website
   path: /
   pathType: Prefix

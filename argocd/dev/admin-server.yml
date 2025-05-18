@@ -14,7 +14,7 @@ spec:
         - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace:  petclinic-dev   # namespace để deploy app config-server
+    namespace:  petclinic-dev   
   syncPolicy:
     automated:
       selfHeal: true

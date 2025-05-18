@@ -19,8 +19,8 @@ configMap:
 ingress:
   tls:
     - hosts:
-        - discovery-server-dev.lptdevops.website
+        - discovery-server.lptdevops.website
       secretName: customer-tls
-  domainName: discovery-server-dev.lptdevops.website
+  domainName: discovery-server.lptdevops.website
   path: /
   pathType: Prefix

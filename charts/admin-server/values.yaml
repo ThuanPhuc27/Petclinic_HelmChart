@@ -1,13 +1,13 @@
 appName: petclinic-admin-server
+service:
+  port: 9090
+  type: ClusterIP
+
 image:
   repository: thuanlp/spring-petclinic-admin-server
   tag: latest
   pullSecret: dockerhub
   pullPolicy: Always
-service:
-  port: 9090
-  type: NodePort
-  nodePort: 30090
 initContainers:
   - name: wait-for-config-server
     image: darthcabs/tiny-tools:1
@@ -15,7 +15,17 @@ initContainers:
   - name: wait-for-discovery-server
     image: darthcabs/tiny-tools:1
     command: ["sh", "-c", "until curl -s http://petclinic-discovery-server-service:8761/; do echo waiting for discovery server; sleep 5; done"]
+
 configMap:
   adminServer:
     create: true
   name: petclinic-admin-server-application-properties-configmap
+
+ingress:
+  tls:
+    - hosts:
+        - admin-server-dev.lptdevops.website
+      secretName: admin-tls
+  domainName: admin-server-dev.lptdevops.website
+  path: /
+  pathType: Prefix
