@@ -2,8 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: {{ .Release.Namespace }}
-    namespace: {{ .Values.namespace }}
+    name: "{{ .Release.appName }}-ingress"
+    namespace: {{ .Values.Namespace }}
     annotations:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
