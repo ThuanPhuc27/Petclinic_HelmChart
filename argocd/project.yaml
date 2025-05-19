@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: petclinic-staging
+  name: petclinic-dev
   namespace: argocd
 spec:
   description: Project cho các ứng dụng của hệ thống Petclinic

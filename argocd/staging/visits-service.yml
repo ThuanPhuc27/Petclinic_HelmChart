@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: visits-service-staging
-  namespace: argocd   # namespace ArgoCD đang chạy, thường là argocd
+  namespace: argocd   
 spec:
   project: petclinic-staging
   source:
@@ -14,7 +14,7 @@ spec:
         - staging-values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace:  petclinic-staging   # namespace để deploy app config-server
+    namespace:  petclinic-staging   
   syncPolicy:
     automated:
       selfHeal: true

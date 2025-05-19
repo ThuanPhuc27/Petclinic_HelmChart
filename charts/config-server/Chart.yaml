@@ -3,13 +3,10 @@ name: config-server
 description: A Helm chart for Spring Cloud Config Server in PetClinic microservices
 type: application
 
-# Chart version (follows SemVer)
 version: 1.0.0
 
-# Version of the Config Server application
 appVersion: latest
 
-# Maintainers
 maintainers:
   - name: Thuan Phuc
     email: thuanlephuc152@gmail.com

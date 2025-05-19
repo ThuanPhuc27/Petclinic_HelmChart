@@ -17,6 +17,26 @@ spec:
       labels:
         app: {{ .Values.appName }}
     spec:
+      {{- if .Values.affinity }}
+      affinity: {{ toYaml .Values.affinity | nindent 8 }}
+      {{- else }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - "{{ .Values.appName }}"
+                - key: "kubernetes.io/metadata.namespace"
+                  operator: In
+                  values:
+                  - "{{ .Release.Namespace }}"
+              topologyKey: kubernetes.io/hostname
+      {{- end }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:
