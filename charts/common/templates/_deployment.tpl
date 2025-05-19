@@ -19,20 +19,18 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: {{ .Values.appName }}
+            topologyKey: kubernetes.io/hostname
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
             podAffinityTerm:
               labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - "{{ .Values.appName }}"
-                - key: "kubernetes.io/metadata.namespace"
-                  operator: In
-                  values:
-                  - "{{ .Release.Namespace }}"
-              topologyKey: kubernetes.io/hostname
+                matchLabels:
+                  app.kubernetes.io/name: {{ .Values.appName }}
+              topologyKey: failure-domain.beta.kubernetes.io/zone
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:
