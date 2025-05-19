@@ -17,9 +17,6 @@ spec:
       labels:
         app: {{ .Values.appName }}
     spec:
-      {{- if .Values.affinity }}
-      affinity: {{ toYaml .Values.affinity | nindent 8 }}
-      {{- else }}
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -36,7 +33,6 @@ spec:
                   values:
                   - "{{ .Release.Namespace }}"
               topologyKey: kubernetes.io/hostname
-      {{- end }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:
