@@ -8,6 +8,6 @@ spec:
     app: {{ .Values.appName }}
   ports:
     - protocol: TCP
-      port: 9411
-      targetPort: 9411
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
   type: ClusterIP 

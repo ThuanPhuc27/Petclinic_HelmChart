@@ -15,9 +15,6 @@ spec:
     spec:
       containers:
         - name: {{ .Values.appName }}
-          image: openzipkin/zipkin
-          resources:
-            limits:
-              memory: 512Mi
+          image: {{ .Values.service.image }}
           ports:
-            - containerPort: 9411
+            - containerPort: {{ .Values.service.port }}
