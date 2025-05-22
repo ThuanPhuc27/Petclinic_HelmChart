@@ -21,19 +21,14 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: {{ .Values.appName }}
-              topologyKey: kubernetes.io/hostname
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  env.kubernetes.io/name: {{ .Values.env }}
-              topologyKey: kubernetes.io/hostname
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: env
+                    operator: In
+                    values: [dev] 
+                topologyKey: kubernetes.io/hostname
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:
