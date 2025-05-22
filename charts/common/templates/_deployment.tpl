@@ -16,14 +16,8 @@ spec:
     metadata:
       labels:
         app: {{ .Values.appName }}
+        env: {{ .Values.env }}
     spec:
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: ScheduleAnyway
-          labelSelector:
-            matchLabels:
-              app: {{ .Values.appName }}
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -32,6 +26,13 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: {{ .Values.appName }}
+              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: {{ .Values.env }}
               topologyKey: kubernetes.io/hostname
       dnsPolicy: ClusterFirst
       restartPolicy: Always

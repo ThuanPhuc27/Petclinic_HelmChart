@@ -1,4 +1,5 @@
 appName: petclinic-vets-service
+env: dev
 image:
   repository: thuanlp/spring-petclinic-vets-service
   tag: latest

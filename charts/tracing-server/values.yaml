@@ -1,5 +1,5 @@
 appName: tracing-server
-
+env: dev
 ingress:
   tls:
     - hosts:

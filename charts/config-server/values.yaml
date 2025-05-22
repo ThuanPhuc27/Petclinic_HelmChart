@@ -1,4 +1,5 @@
 appName: petclinic-config-server
+env: dev
 image:
   repository: thuanlp/spring-petclinic-config-server
   tag: latest

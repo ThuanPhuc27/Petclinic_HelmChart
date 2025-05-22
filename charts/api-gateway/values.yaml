@@ -1,4 +1,5 @@
 appName: petclinic-api-gateway
+env: dev
 image:
   repository: thuanlp/spring-petclinic-api-gateway
   tag: latest

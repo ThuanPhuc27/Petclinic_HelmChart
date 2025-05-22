@@ -1,4 +1,5 @@
 appName: petclinic-admin-server
+env: dev
 service:
   port: 9090
   type: ClusterIP
