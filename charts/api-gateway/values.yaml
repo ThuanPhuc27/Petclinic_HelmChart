@@ -1,5 +1,10 @@
 appName: petclinic-api-gateway
 env: dev
+global:
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
 image:
   repository: thuanlp/spring-petclinic-api-gateway
   tag: latest
