@@ -5,7 +5,7 @@ image:
   tag: latest
   pullSecret: dockerhub
   pullPolicy: Always
-replicaCount: 4
+replicaCount: 1
 service:
   port: 8081
   type: ClusterIP
