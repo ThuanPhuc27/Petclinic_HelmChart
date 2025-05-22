@@ -23,14 +23,14 @@ spec:
           - labelSelector:
               matchLabels:
                 app.kubernetes.io/name: {{ .Values.appName }}
-            topologyKey: kubernetes.io/hostname
+            topologyKey: kubernetes.io/hostname 
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
             podAffinityTerm:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: {{ .Values.appName }}
-              topologyKey: failure-domain.beta.kubernetes.io/zone
+              topologyKey: kubernetes.io/hostname
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:
