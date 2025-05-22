@@ -1,4 +1,5 @@
 appName: petclinic-customers-service
+env: staging
 image:
   repository: thuanlp/spring-petclinic-customers-service
   tag: latest
@@ -20,10 +21,6 @@ configMap:
   name: petclinic-customers-service-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - customer-service.lptdevops.website
-      secretName: customer-tls
   domainName: customer-service.lptdevops.website
   path: /
   pathType: Prefix

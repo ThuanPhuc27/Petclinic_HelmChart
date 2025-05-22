@@ -18,10 +18,6 @@ configMap:
   name: petclinic-discovery-server-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - discovery-server-dev.lptdevops.website
-      secretName: discovery-tls
   domainName: discovery-server-dev.lptdevops.website
   path: /
   pathType: Prefix

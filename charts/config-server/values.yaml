@@ -15,10 +15,6 @@ configMap:
   name: petclinic-config-server-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - config-server-dev.lptdevops.website
-      secretName: config-tls
   domainName: config-server-dev.lptdevops.website
   path: /
   pathType: Prefix

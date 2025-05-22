@@ -1,4 +1,5 @@
 appName: petclinic-api-gateway
+env: staging
 image:
   repository: thuanlp/spring-petclinic-api-gateway
   tag: latest
@@ -21,10 +22,6 @@ configMap:
   name: petclinic-api-gateway-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - api-gateway.lptdevops.website
-      secretName: gateway-tls
   domainName: api-gateway.lptdevops.website
   path: /
   pathType: Prefix

@@ -21,10 +21,6 @@ configMap:
     create: true
 
 ingress:
-  tls:
-    - hosts:
-        - visits-service-dev.lptdevops.website
-      secretName: visits-tls
   domainName: visits-service-dev.lptdevops.website
   path: /
   pathType: Prefix

@@ -27,7 +27,7 @@ spec:
                   matchExpressions:
                   - key: env
                     operator: In
-                    values: [dev] 
+                    values: [{{ .Values.env }}] 
                 topologyKey: kubernetes.io/hostname
       dnsPolicy: ClusterFirst
       restartPolicy: Always

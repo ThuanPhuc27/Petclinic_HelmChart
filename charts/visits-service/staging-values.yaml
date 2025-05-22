@@ -1,4 +1,6 @@
 appName: petclinic-visits-service
+env: staging
+
 image:
   repository: thuanlp/spring-petclinic-visits-service
   tag: latest
@@ -20,10 +22,6 @@ configMap:
     create: true
 
 ingress:
-  tls:
-    - hosts:
-        - visits-service.lptdevops.website
-      secretName: visits-tls
   domainName: visits-service.lptdevops.website
   path: /
   pathType: Prefix

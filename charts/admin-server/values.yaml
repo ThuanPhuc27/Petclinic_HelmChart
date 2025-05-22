@@ -23,10 +23,6 @@ configMap:
   name: petclinic-admin-server-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - admin-server-dev.lptdevops.website
-      secretName: admin-tls
   domainName: admin-server-dev.lptdevops.website
   path: /
   pathType: Prefix

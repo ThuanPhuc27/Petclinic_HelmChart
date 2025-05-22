@@ -21,10 +21,6 @@ configMap:
     create: true
 
 ingress:
-  tls:
-    - hosts:
-        - vets-service-dev.lptdevops.website
-      secretName: vets-tls
   domainName: vets-service-dev.lptdevops.website
   path: /
   pathType: Prefix

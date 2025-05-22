@@ -1,4 +1,6 @@
 appName: petclinic-vets-service
+env: staging
+
 image:
   repository: thuanlp/spring-petclinic-vets-service
   tag: latest
@@ -20,10 +22,6 @@ configMap:
     create: true
 
 ingress:
-  tls:
-    - hosts:
-        - vets-service.lptdevops.website
-      secretName: vets-tls
   domainName: vets-service.lptdevops.website
   path: /
   pathType: Prefix

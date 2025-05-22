@@ -22,10 +22,6 @@ configMap:
   name: petclinic-api-gateway-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - api-gateway-dev.lptdevops.website
-      secretName: gateway-tls
   domainName: api-gateway-dev.lptdevops.website
   path: /
   pathType: Prefix

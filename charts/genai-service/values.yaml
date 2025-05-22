@@ -21,10 +21,6 @@ configMap:
   name: petclinic-genai-service-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - genai-service-dev.lptdevops.website
-      secretName: genai-tls
   domainName: genai-service-dev.lptdevops.website
   path: /
   pathType: Prefix

@@ -22,10 +22,6 @@ configMap:
   name: petclinic-customers-service-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - customer-service-dev.lptdevops.website
-      secretName: customer-tls
   domainName: customer-service-dev.lptdevops.website
   path: /
   pathType: Prefix

@@ -1,4 +1,5 @@
 appName: petclinic-genai-service
+env: staging
 image:
   repository: thuanlp/spring-petclinic-genai-service
   tag: latest
@@ -20,10 +21,6 @@ configMap:
   name: petclinic-genai-service-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - genai-service.lptdevops.website
-      secretName: genai-tls
   domainName: genai-service.lptdevops.website
   path: /
   pathType: Prefix

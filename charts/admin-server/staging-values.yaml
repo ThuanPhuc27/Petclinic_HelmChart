@@ -1,8 +1,8 @@
 appName: petclinic-admin-server
+env: staging
 service:
   port: 9090
   type: ClusterIP
-
 image:
   repository: thuanlp/spring-petclinic-admin-server
   tag: latest
@@ -22,10 +22,6 @@ configMap:
   name: petclinic-admin-server-application-properties-configmap
 
 ingress:
-  tls:
-    - hosts:
-        - admin-server.lptdevops.website
-      secretName: dashboard-tls
   domainName: admin-server.lptdevops.website
   path: /
   pathType: Prefix
