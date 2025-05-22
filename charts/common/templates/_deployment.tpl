@@ -32,7 +32,7 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchLabels:
-                  app.kubernetes.io/name: {{ .Values.env }}
+                  env.kubernetes.io/name: {{ .Values.env }}
               topologyKey: kubernetes.io/hostname
       dnsPolicy: ClusterFirst
       restartPolicy: Always
