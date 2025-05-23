@@ -3,6 +3,13 @@ kind: Application
 metadata:
   name: visits-service-dev
   namespace: argocd   # namespace ArgoCD đang chạy, thường là argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: visits-service=thuanlp/spring-petclinic-visits-service:latest
+    argocd-image-updater.argoproj.io/visits-service.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/visits-service.helm.image-tag: image.tag
+    argocd-image-updater.argoproj.io/visits-service.update-strategy: digest
+    argocd-image-updater.argoproj.io/visits-service.allow-tags: latest
+    argocd-image-updater.argoproj.io/visits-service.pull-secret: pullsecret:dockerhub
 spec:
   project: petclinic-dev
   source:
