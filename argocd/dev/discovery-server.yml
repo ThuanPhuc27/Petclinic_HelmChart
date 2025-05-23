@@ -9,7 +9,7 @@ metadata:
     argocd-image-updater.argoproj.io/discovery-server.helm.image-tag: image.tag
     argocd-image-updater.argoproj.io/discovery-server.update-strategy: digest
     argocd-image-updater.argoproj.io/discovery-server.allow-tags: latest
-    argocd-image-updater.argoproj.io/discovery-server.pull-secret: pullsecret:dockerhub
+    argocd-image-updater.argoproj.io/discovery-server.pull-secret: pullsecret:argocd/dockerhub
 spec:
   project: petclinic-dev
   source:

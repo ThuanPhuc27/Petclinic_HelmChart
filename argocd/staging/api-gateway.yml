@@ -9,7 +9,7 @@ metadata:
     argocd-image-updater.argoproj.io/admin-server.helm.image-tag: image.tag
     argocd-image-updater.argoproj.io/admin-server.update-strategy: semver
     argocd-image-updater.argoproj.io/admin-server.allow-tags: regexp:^v\d+\.\d+\.\d+$
-    argocd-image-updater.argoproj.io/admin-server.pull-secret: pullsecret:dockerhub
+    argocd-image-updater.argoproj.io/admin-server.pull-secret: pullsecret:argocd/dockerhub
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
 spec:
   project: petclinic-staging
