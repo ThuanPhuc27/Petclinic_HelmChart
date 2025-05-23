@@ -3,7 +3,7 @@ env: staging
 
 image:
   repository: thuanlp/spring-petclinic-visits-service
-  tag: latest
+  tag: v1.0.0
   pullSecret: dockerhub
   pullPolicy: Always
 service:

@@ -2,7 +2,7 @@ appName: petclinic-config-server
 env: staging
 image:
   repository: thuanlp/spring-petclinic-config-server
-  tag: latest
+  tag: v1.0.0
   pullSecret: dockerhub
   pullPolicy: Always
 service:

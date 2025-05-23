@@ -5,7 +5,7 @@ service:
   type: ClusterIP
 image:
   repository: thuanlp/spring-petclinic-admin-server
-  tag: latest
+  tag: v1.0.0
   pullSecret: dockerhub
   pullPolicy: Always
 initContainers:
