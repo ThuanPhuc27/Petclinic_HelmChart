@@ -2,7 +2,7 @@ appName: petclinic-discovery-server
 env: dev
 image:
   repository: thuanlp/spring-petclinic-discovery-server
-  tag: v1.0.0
+  tag: latest
   pullSecret: dockerhub
   pullPolicy: Always
 service:
