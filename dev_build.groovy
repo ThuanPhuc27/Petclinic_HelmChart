@@ -40,17 +40,15 @@ pipeline {
                 dir('Petclinic_HelmChart') {
                     script {
                         def services = [
+                            [name: "config-server", branch: params.config_server_branch],
+                            [name: "discovery-server", branch: params.discovery_server_branch],
                             [name: "admin-server", branch: params.admin_server_branch],
                             [name: "api-gateway", branch: params.api_gateway_branch],
-                            [name: "config-server", branch: params.config_server_branch],
                             [name: "customers-service", branch: params.customer_service_branch],
-                            [name: "discovery-server", branch: params.discovery_server_branch],
                             [name: "genai-service", branch: params.genai_service_branch],
                             [name: "vets-service", branch: params.vets_service_branch],
                             [name: "visits-service", branch: params.visits_service_branch]
                         ]
-
-                        def commitMessages = []
 
                         services.each { service ->
                             echo "Updating ${service.name} from branch: ${service.branch}"
@@ -67,7 +65,6 @@ pipeline {
                             echo "Using image tag: ${imageTag}"
 
                             sh """
-                                pwd
                                 helm dependency build charts/${service.name}/
                                 helm upgrade --install ${service.name} charts/${service.name} \
                                     --namespace petclinic-review --create-namespace \
@@ -76,6 +73,14 @@ pipeline {
                                     --set ingress.domainName=${service.name}-review.lptdevops.website
                             """
                         }
+
+                        sh """
+                                helm dependency build charts/tracing-server/
+                                helm upgrade --install tracing-server charts/tracing-server \
+                                    --namespace petclinic-review --create-namespace \
+                                    -f charts/tracing-server/values.yaml \
+                                    --set ingress.domainName=tracing-server-review.lptdevops.website
+                            """
                     }
                 }
             }
