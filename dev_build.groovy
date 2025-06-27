@@ -86,6 +86,16 @@ pipeline {
             }
         }
 
+        stage('Dev remove') {
+            steps {
+                script {
+                    currentBuild.displayName = "Display name #${currentBuild.number}"
+                    currentBuild.description = "Build description #${currentBuild.number} [remove_dev](https://jenkins.lptdevops.website/job/petclinic/job/dev-remove/build"
+                }
+            }
+        }
+
+
 
     }
 }
