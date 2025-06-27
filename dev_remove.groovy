@@ -15,7 +15,6 @@ pipeline {
                             [name: "genai-service"],
                             [name: "vets-service"],
                             [name: "visits-service"],
-                            [name: "tracing-server"]
 
                         ]
 

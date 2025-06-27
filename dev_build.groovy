@@ -74,13 +74,6 @@ pipeline {
                             """
                         }
 
-                        sh """
-                                helm dependency build charts/tracing-server/
-                                helm upgrade --install tracing-server charts/tracing-server \
-                                    --namespace petclinic-review --create-namespace \
-                                    -f charts/tracing-server/values.yaml \
-                                    --set ingress.domainName=tracing-server-review.lptdevops.website
-                            """
                     }
                 }
             }
