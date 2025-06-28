@@ -2,7 +2,7 @@ appName: petclinic-visits-service
 env: dev
 image:
   repository: runandgo/spring-petclinic-visits-service
-  tag: v1.2.9
+  tag: v1.2.10
   pullSecret: dockerhub
   pullPolicy: Always
 service:
