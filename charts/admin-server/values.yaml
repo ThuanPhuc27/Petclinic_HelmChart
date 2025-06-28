@@ -11,7 +11,7 @@ service:
 
 image:
   repository: runandgo/spring-petclinic-admin-server
-  tag: v1.2.10
+  tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
 initContainers:

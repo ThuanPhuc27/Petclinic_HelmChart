@@ -7,7 +7,7 @@ global:
       effect: "NoSchedule"
 image:
   repository: runandgo/spring-petclinic-api-gateway
-  tag: v1.2.10
+  tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
 service:

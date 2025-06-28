@@ -2,7 +2,7 @@ appName: petclinic-vets-service
 env: dev
 image:
   repository: runandgo/spring-petclinic-vets-service
-  tag: v1.2.10
+  tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
 service:

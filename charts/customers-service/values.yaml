@@ -2,7 +2,7 @@ appName: petclinic-customers-service
 env: dev
 image:
   repository: runandgo/spring-petclinic-customers-service
-  tag: v1.2.10
+  tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
 replicaCount: 1
