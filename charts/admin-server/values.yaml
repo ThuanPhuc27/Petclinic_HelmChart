@@ -11,7 +11,7 @@ service:
 
 image:
   repository: thuanlp/spring-petclinic-admin-server
-  tag: latest
+  tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
 initContainers:

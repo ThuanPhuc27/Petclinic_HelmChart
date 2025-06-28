@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: petclinic-dev
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: admin-server
+            path: charts/admin-server
+            imageName: admin-server
+            imageRepo: thuanlp/spring-petclinic-admin-server
+          - name: api-gateway
+            path: charts/api-gateway
+            imageName: api-gateway
+            imageRepo: thuanlp/spring-petclinic-api-gateway
+          - name: config-server
+            path: charts/config-server
+            imageName: config-server
+            imageRepo: thuanlp/spring-petclinic-config-server
+          - name: customers-service
+            path: charts/customers-service
+            imageName: customers-service
+            imageRepo: thuanlp/spring-petclinic-customers-service
+          - name: visits-service
+            path: charts/visits-service
+            imageName: visits-service
+            imageRepo: thuanlp/spring-petclinic-visits-service
+          - name: discovery-server
+            path: charts/discovery-server
+            imageName: discovery-server
+            imageRepo: thuanlp/spring-petclinic-discovery-server
+          - name: genai-service
+            path: charts/genai-service
+            imageName: visits-service
+            imageRepo: thuanlp/spring-petclinic-genai-service
+          - name: vets-service
+            path: charts/vets-service
+            imageName: vets-service
+            imageRepo: thuanlp/spring-petclinic-vets-service
+  template:
+    metadata:
+      name: '{{name}}-dev'
+      namespace: argocd
+      annotations:
+        argocd-image-updater.argoproj.io/image-list: '{{imageName}}={{imageRepo}}:dev'
+        argocd-image-updater.argoproj.io/{{imageName}}.helm.image-name: image.repository
+        argocd-image-updater.argoproj.io/{{imageName}}.helm.image-tag: image.tag
+        argocd-image-updater.argoproj.io/{{imageName}}.update-strategy: digest
+    spec:
+      project: petclinic-dev
+      source:
+        repoURL: https://github.com/ThuanPhuc27/Petclinic_HelmChart
+        targetRevision: main
+        path: '{{path}}'
+        helm:
+          valueFiles:
+            - values.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: petclinic-dev
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true

@@ -2,7 +2,7 @@ appName: petclinic-config-server
 env: dev
 image:
   repository: thuanlp/spring-petclinic-config-server
-  tag: latest
+  tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
 service:

@@ -7,7 +7,7 @@ global:
       effect: "NoSchedule"
 image:
   repository: thuanlp/spring-petclinic-api-gateway
-  tag: latest
+  tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
 service:

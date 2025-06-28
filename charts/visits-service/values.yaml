@@ -2,7 +2,7 @@ appName: petclinic-visits-service
 env: dev
 image:
   repository: thuanlp/spring-petclinic-visits-service
-  tag: latest
+  tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
 service:
