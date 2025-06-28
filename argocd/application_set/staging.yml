@@ -1,7 +1,7 @@
-apiVersion: argoproj.io/v1alpha1 
+apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: petclinic-dev
+  name: petclinic-staging
   namespace: argocd
 spec:
   generators:
@@ -25,24 +25,25 @@ spec:
             path: charts/vets-service
   template:
     metadata:
-      name: '{{name}}-dev'
+      name: '{{name}}-staging'
       namespace: argocd
     spec:
-      project: petclinic-dev
+      project: petclinic-staging
       source:
         repoURL: https://github.com/ThuanPhuc27/Petclinic_HelmChart
         targetRevision: main
         path: '{{path}}'
         helm:
           valueFiles:
-            - values.yaml
+            - staging-values.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: petclinic-dev
+        namespace: petclinic-staging
       syncPolicy:
         automated:
           selfHeal: true
           prune: true
+          prunePropagationPolicy: Foreground
         syncOptions:
           - CreateNamespace=true
           - PruneLast=true

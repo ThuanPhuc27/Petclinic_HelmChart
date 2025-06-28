@@ -10,7 +10,7 @@ service:
   type: ClusterIP
 
 image:
-  repository: thuanlp/spring-petclinic-admin-server
+  repository: runandgo/spring-petclinic-admin-server
   tag: dev
   pullSecret: dockerhub
   pullPolicy: Always

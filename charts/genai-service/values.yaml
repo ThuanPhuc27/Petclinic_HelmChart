@@ -1,7 +1,7 @@
 appName: petclinic-genai-service
 env: dev
 image:
-  repository: thuanlp/spring-petclinic-genai-service
+  repository: runandgo/spring-petclinic-genai-service
   tag: dev
   pullSecret: dockerhub
   pullPolicy: Always
