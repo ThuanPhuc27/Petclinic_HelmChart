@@ -2,7 +2,7 @@ appName: petclinic-config-server
 env: staging
 image:
   repository: runandgo/spring-petclinic-config-server
-  tag: v1.2.10
+  tag: v1.2.11
   pullSecret: dockerhub
   pullPolicy: Always
 service:

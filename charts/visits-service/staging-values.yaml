@@ -3,7 +3,7 @@ env: staging
 
 image:
   repository: runandgo/spring-petclinic-visits-service
-  tag: v1.0.0
+  tag: v1.2.11
   pullSecret: dockerhub
   pullPolicy: Always
 service:

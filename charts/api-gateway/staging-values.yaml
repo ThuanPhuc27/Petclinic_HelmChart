@@ -2,7 +2,7 @@ appName: petclinic-api-gateway
 env: staging
 image:
   repository: runandgo/spring-petclinic-api-gateway
-  tag: v1.2.10
+  tag: v1.2.11
   pullSecret: dockerhub
   pullPolicy: Always
 service:
