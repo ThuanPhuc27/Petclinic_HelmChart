@@ -47,6 +47,9 @@ data:
     management.zipkin.tracing.endpoint=http://tracing-server-service.default.svc.cluster.local:9411/api/v2/spans
     management.metrics.distribution.percentiles-histogram.http.server.requests=true
     management.metrics.enable.exemplars=true
+    management.endpoint.prometheus.enabled=true
+    management.endpoints.web.exposure.include=prometheus
+    
     logging.pattern.console=%clr(%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}){faint} %clr(%5p) level="%p" time="%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}" service="${spring.application.name}" traceId="%X{traceId:-}" spanId="%X{spanId:-}" thread="%t" logger="%logger{39}" message="%m"%n
     logging.pattern.file=%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} level="%p" time="%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}" service="${spring.application.name}" traceId="%X{traceId:-}" spanId="%X{spanId:-}" thread="%t" logger="%logger{39}" message="%m"%n
     
