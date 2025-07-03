@@ -46,22 +46,6 @@ spec:
             - containerPort: {{ .Values.service.port }}
               name: {{ .Values.service.name | default "tcp" }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: {{ .Values.service.port }}
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 2
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: {{ .Values.service.port }}
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 2
-            failureThreshold: 3
           volumeMounts:
             - name: config-volume
               mountPath: /app/config/application.properties
