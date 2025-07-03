@@ -55,8 +55,6 @@ data:
     
     # Logging levels
     logging.level.io.micrometer.tracing=${LOGGING_LEVEL_IO_MICROMETER_TRACING:DEBUG}
-    logging.level.org.springframework.cloud.sleuth=DEBUG
-    logging.level.org.springframework.cloud.sleuth.autoconfig=DEBUG
     logging.level.org.springframework.web=DEBUG
     
     # Charset
